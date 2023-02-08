@@ -26,6 +26,7 @@
 
     - name: "Sacar ficheros de la carpeta Wordpress"
       shell: mv /var/www/html/wordpress/public_html/wordpress/* /var/www/html/wordpress/public_html/
+      ignore_errors: true
 
     - name: "Eliminar carpeta Wordpress"
       shell: rm -rf /var/www/html/wordpress/public_html/wordpress
