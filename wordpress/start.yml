@@ -1,6 +1,6 @@
 ---
 - name: "Wordpress+Nginx+MariaDB"
-  hosts: host
+  hosts: all
   become: yes
   roles:
     - nginx
