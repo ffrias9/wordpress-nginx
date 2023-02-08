@@ -9,6 +9,7 @@
 
     - name: "Crear enlace simbolico"
       shell: ln -s /etc/nginx/sites-available/wordpress.conf /etc/nginx/sites-enabled/
+      ignore_errors: true
 
     - name: "Eliminar fichero default"
       shell: rm /etc/nginx/sites-enabled/default
