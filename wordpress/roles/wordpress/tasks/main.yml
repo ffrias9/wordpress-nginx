@@ -13,6 +13,7 @@
 
     - name: "Eliminar fichero default"
       shell: rm /etc/nginx/sites-enabled/default
+      ignore_errors: true
 
     - name: "Reiniciar nginx"
       shell: systemctl reload nginx
