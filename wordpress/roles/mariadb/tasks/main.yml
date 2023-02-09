@@ -34,7 +34,6 @@
         login_password: toor
         login_host: localhost
         state: present
-        check_implicit_admin: yes
 
     - name: Crear usuario para la base de datos
       mysql_user:
