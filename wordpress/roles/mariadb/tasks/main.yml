@@ -18,18 +18,18 @@
     - name: Establecer contraseña para usuario root
       shell: mysql -u root --password=toor -e "select(1);"
 
-    - name: Crear base de datos para WordPress
-      become: yes
-      mysql_db:
-        name: wordpress_db
-        login_user: root
-        login_password: ""
-        login_host: localhost
-        state: present
-
     - name: Crear usuario para la base de datos
       mysql_user:
         state: present
         name: wpuser
         password: Passw0rd!
         priv: 'wordpress_db.*:ALL,GRANT'
+        
+    - name: Crear base de datos para WordPress
+      become: yes
+      mysql_db:
+        name: wordpress_db
+        login_user: wpuser
+        login_password: Passw0rd!
+        login_host: localhost
+        state: present
