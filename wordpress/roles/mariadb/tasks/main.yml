@@ -24,9 +24,9 @@
     - name: Crear base de datos para WordPress
       mysql_db:
         name: wordpress_db
-        #login_user: root
-        #login_password: toor
-        #login_host: localhost
+        login_user: root
+        login_password: toor
+        login_host: localhost
         state: present
 
     - name: crear usuario
