@@ -33,7 +33,10 @@
 
     - name: Crear usuario para la base de datos
       mysql_user:
-        state: present
+        login_user: root
+        login_password: toor
+        login_host: localhost
         name: wpuser
         password: Passw0rd!
         priv: 'wordpress_db.*:ALL,GRANT'
+        state: present
