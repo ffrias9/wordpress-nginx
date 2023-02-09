@@ -5,8 +5,8 @@
           - mariadb-server
           - python3-pymysql
           - python3-mysqldb
-          - python2-pymysql
-          - python2-mysqldb
+          - python-pymysql
+          - python-mysqldb
         state: latest
   
     - name: Iniciar MariaDB
