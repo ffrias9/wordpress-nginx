@@ -15,17 +15,8 @@
         enabled: true
         state: started
 
-    - name: Establecer contraseña para usuario root
-      shell: mysql -u root --password=toor -e "select(1);"
-      
-    - name: Collect all possible information using passwordless root access
-      mysql_info:
-        login_user: root
-      register: mysqlinfo
-
-    - name: Print mysqlinfo
-      debug:
-        msg: "{{ mysqlinfo }}"
+#    - name: Establecer contraseña para usuario root
+#      shell: mysql -u root --password=toor -e "select(1);"
 
     - name: Crear base de datos para WordPress
       mysql_db:
@@ -34,6 +25,9 @@
         login_password: toor
         login_host: localhost
         state: present
+
+    - name: crear usuario
+      mysql_user: name=fran password=fran1234 state=present privs="wordpress_db.*:ALL"
 
     - name: Crear usuario para la base de datos
       mysql_user:
