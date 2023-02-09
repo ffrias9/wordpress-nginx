@@ -14,6 +14,8 @@
         name: mariadb
         enabled: true
         state: started
+      pause: 
+        minutes: 5
 
     - name: Establecer contraseña para usuario root
       shell: mysql -u root --password=toor -e "select(1);"
