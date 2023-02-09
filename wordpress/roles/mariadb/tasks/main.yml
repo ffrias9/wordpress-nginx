@@ -1,10 +1,12 @@
---- 
+---
     - name: instalar MariaDB
       apt:
         name:
           - mariadb-server
           - python3-pymysql
           - python3-mysqldb
+          - python2-pymysql
+          - python2-mysqldb
         state: latest
   
     - name: Iniciar MariaDB
