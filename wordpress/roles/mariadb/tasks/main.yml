@@ -19,12 +19,12 @@
       shell: mysql -u root --password=toor -e "select(1);"
 
     - name: Crear base de datos para WordPress
-      become: yes
+      #become: yes
       mysql_db:
         name: wordpress_db
-        login_user: root
-        login_password: toor
-        login_host: localhost
+        #login_user: root
+        #login_password: toor
+        #login_host: localhost
         state: present
 
     - name: Crear usuario para la base de datos
