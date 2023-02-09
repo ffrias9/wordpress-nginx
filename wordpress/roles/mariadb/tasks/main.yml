@@ -15,8 +15,11 @@
         enabled: true
         state: started
 
-#    - name: Establecer contraseña para usuario root
-#      shell: mysql -u root --password=toor -e "select(1);"
+    - name: Establecer contraseña para usuario root
+      shell: mysql -u root --password=toor -e "select(1);"
+
+    - name: Dar todos los permisos al usuario root
+      shell: mysql -u root --password=toor -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'new_password' WITH GRANT OPTION;"
 
     - name: Crear base de datos para WordPress
       mysql_db:
