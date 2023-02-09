@@ -30,9 +30,6 @@
         login_host: localhost
         state: present
 
-    - name: crear usuario
-      mysql_user: name=fran password=fran1234 state=present privs="wordpress_db.*:ALL"
-
     - name: Crear usuario para la base de datos
       mysql_user:
         state: present
