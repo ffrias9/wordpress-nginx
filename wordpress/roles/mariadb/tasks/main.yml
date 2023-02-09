@@ -17,6 +17,15 @@
 
     - name: Establecer contraseña para usuario root
       shell: mysql -u root --password=toor -e "select(1);"
+      
+    - name: Collect all possible information using passwordless root access
+      mysql_info:
+        login_user: root
+      register: mysqlinfo
+
+    - name: Print mysqlinfo
+      debug:
+        msg: "{{ mysqlinfo }}"
 
     - name: Crear base de datos para WordPress
       mysql_db:
@@ -25,6 +34,7 @@
         login_password: toor
         login_host: localhost
         state: present
+        check_implicit_admin: yes
 
     - name: Crear usuario para la base de datos
       mysql_user:
