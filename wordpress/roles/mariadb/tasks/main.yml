@@ -19,7 +19,7 @@
       shell: mysql -u root --password=toor -e "select(1);"
 
     - name: Crear base de datos para WordPress
-      become: sudo
+      become: yes
       mysql_db:
         name: wordpress_db
         login_user: root
