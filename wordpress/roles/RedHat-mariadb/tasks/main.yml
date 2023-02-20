@@ -1,6 +1,6 @@
 ---
     - name: instalar MariaDB
-      apt:
+      yum:
         name:
           - mariadb-server
           - python3-pymysql

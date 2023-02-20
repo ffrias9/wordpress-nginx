@@ -3,6 +3,16 @@
   hosts: all
   become: yes
   roles:
-    - nginx
-    - wordpress
-    - mariadb
+     - role: Debian-nginx
+       when: ansible_os_family == "Debian"
+
+     - role: RedHat-nginx
+       when: ansible_os_family == "RedHat"
+
+     - role: wordpress
+
+     - role: Debian-mariadb
+       when: ansible_os_family == "Debian"
+
+     - role: RedHat-mariadb
+       when: ansible_os_family == "RedHat"

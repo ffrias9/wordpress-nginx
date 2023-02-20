@@ -1,20 +1,21 @@
 ---
     - name: "Actualizar paquetes"
-      apt:
+      yum:
         update_cache: yes
 
     - name: "Upgradear paquetes"
-      apt:
-        upgrade: dist
+      yum:
+        name: "*"
+        state: latest
 
     - name: "Instalar nginx"
-      package:
+      yum:
         name:
           - nginx
         state: present
 
     - name: "Instalar paquetes necesarios"
-      package:
+      yum:
         name:
           - php
           - php-cli
