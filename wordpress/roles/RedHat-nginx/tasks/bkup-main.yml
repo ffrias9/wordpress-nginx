@@ -14,6 +14,12 @@
           - nginx
         state: present
 
+    - name: "Iniciar Nginx"
+      service:
+        name: nginx
+        enabled: true
+        state: restarted
+
     - name: "Instalar paquetes necesarios"
       yum:
         name:
@@ -28,4 +34,3 @@
           - php-gd
           - php-curl
         state: present
-      register: result

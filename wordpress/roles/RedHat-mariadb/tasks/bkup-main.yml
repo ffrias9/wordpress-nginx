@@ -3,11 +3,10 @@
       yum:
         name:
           - mariadb-server
-          - python2
-          - python3
-          - python3-PyMySQL
-          - python3-mysql
-          - python2-PyMySQL
+          - python3-pymysql
+          - python3-mysqldb
+          - python-pymysql
+          - python-mysqldb
         state: latest
   
     - name: Iniciar MariaDB
