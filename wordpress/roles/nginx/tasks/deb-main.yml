@@ -1,0 +1,29 @@
+---
+    - name: "Actualizar paquetes"
+      apt:
+        update_cache: yes
+
+    - name: "Upgradear paquetes"
+      apt:
+        upgrade: dist
+
+    - name: "Instalar nginx"
+      package:
+        name:
+          - nginx
+        state: present
+
+    - name: "Instalar paquetes necesarios"
+      package:
+        name:
+          - php
+          - php-cli
+          - php-fpm
+          - php-mysql
+          - php-json
+          - php-opcache
+          - php-mbstring
+          - php-xml
+          - php-gd
+          - php-curl
+        state: present
