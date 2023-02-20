@@ -1,8 +1,6 @@
 ---
     - name: "Actualizar paquetes"
-      apt:
-        upgrade: yes
-        update_cache: yes
+      command: apt update
 
     - name: "Upgradear paquetes"
       apt:
