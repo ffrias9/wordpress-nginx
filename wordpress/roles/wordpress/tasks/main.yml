@@ -1,8 +1,6 @@
 ---
     - name: "Crear directorio"
-      file:
-        path: /var/www/html/wordpress/public_html
-        state: directory
+      shell: mkdir -p /var/www/html/wordpress/public_html
 
     - name: "Copiar archivo de configuración"
       copy:
@@ -10,61 +8,42 @@
         dest: /etc/nginx/sites-available
 
     - name: "Crear enlace simbolico"
-      file:
-        src: /etc/nginx/sites-available/wordpress.conf
-        dest: /etc/nginx/sites-enabled/
-        state: link
+      shell: ln -s /etc/nginx/sites-available/wordpress.conf /etc/nginx/sites-enabled/
       ignore_errors: true
 
     - name: "Eliminar fichero default"
-      file:
-        path: /etc/nginx/sites-enabled/default
-        state: absent
+      shell: rm /etc/nginx/sites-enabled/default
       ignore_errors: true
 
-    - name: "Reiniciar Nginx"
-      service:
-        name: nginx
-        enabled: true
-        state: restarted
+    - name: "Reiniciar nginx"
+      shell: systemctl reload nginx
 
     - name: "Descargar Wordpress"
-      get_url:
-        url: https://wordpress.org/latest.tar.gz
-        dest: /var/www/html/wordpress/public_html/
+      shell: wget -P /var/www/html/wordpress/public_html/ https://wordpress.org/latest.tar.gz
 
     - name: "Extraer ficheros"
-      unarchive:
-        src: /var/www/html/wordpress/public_html/latest.tar.gz
-        dest: /var/www/html/wordpress/public_html/
+      shell: tar -zxvf /var/www/html/wordpress/public_html/latest.tar.gz -C /var/www/html/wordpress/public_html/
 
     - name: "Sacar ficheros de la carpeta Wordpress"
-      command: mv /var/www/html/wordpress/public_html/wordpress/* /var/www/html/wordpress/public_html/
+      shell: mv /var/www/html/wordpress/public_html/wordpress/* /var/www/html/wordpress/public_html/
       ignore_errors: true
 
     - name: "Eliminar carpeta Wordpress"
-      file:
-        path: /var/www/html/wordpress/public_html/wordpress
-        state: absent
+      shell: rm -rf /var/www/html/wordpress/public_html/wordpress
 
-    - name: "Cambiar propietario y permisos"
-      file:
-        path: /var/www/html/wordpress/public_html/*
-        owner: www-data
-        group: www-data
-        mode: 755
-        recurse: true
+    - name: "Cambiar propietario"
+      shell: chown -R www-data:www-data /var/www/html/wordpress/public_html/*
+
+    - name: "Cambiar permisos"
+      shell: chmod -R 755 /var/www/html/wordpress/public_html/*
 
     - name: "Cambiar nomre de fichero"
-      command: mv /var/www/html/wordpress/public_html/wp-config-sample.php /var/www/html/wordpress/public_html/wp-config.php
+      shell: mv /var/www/html/wordpress/public_html/wp-config-sample.php /var/www/html/wordpress/public_html/wp-config.php
 
     - name: "Copiar fichero de configuración de Wordpress"
       copy:
         src: wp-config.php
         dest: /var/www/html/wordpress/public_html
 
-    - name: "Reiniciar Nginx"
-      service:
-        name: nginx
-        enabled: true
-        state: restarted
+    - name: "Reiniciar nginx"
+      shell: systemctl reload nginx
